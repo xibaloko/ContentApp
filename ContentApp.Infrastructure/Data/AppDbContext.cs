@@ -1,5 +1,6 @@
 ﻿using ContentApp.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 namespace ContentApp.Infrastructure.Data
 {
@@ -7,6 +8,7 @@ namespace ContentApp.Infrastructure.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base (options)
         {
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,5 +25,9 @@ namespace ContentApp.Infrastructure.Data
                 .WithMany(inv => inv.Products)
                 .HasForeignKey(prod => prod.InventoryId);
         }
+
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Product> Inventories { get; set; }
     }
 }
